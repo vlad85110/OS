@@ -2,24 +2,27 @@
 #include <unistd.h>
 #include <signal.h>
 
+#define __USE_POSIX199309 1
+
+static struct sigaction act;
+
+void action(int a) {
+    printf("add");
+}
+
 int main(int argc, char **argv) {
     pid_t cpid;
     int status;
 
     sigset_t sigset;
-    sigfillset(&sigset);
-    sigaddset(&sigset, SIGQUIT);
-    sigdelset(&sigset, SIGINT);
-
-    struct sigaction act;
-
-    act.sa_mask = sigset;
-    act.sa_flags = SIG_DFL;
+    act.sa_handler = action;
 
 
-    sigaction(SIGINT, )
+    //sigfillset(&act.sa_mask);
 
+    sigaction(SIGINT, &act, NULL);
 
+    raise(SIGINT);
 
     //cpid = fork();
     return 0;
