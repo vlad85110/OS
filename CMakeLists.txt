@@ -4,4 +4,4 @@ project(OS C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(OS task25.c)
+add_executable(OS task26.c)

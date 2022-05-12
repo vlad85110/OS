@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
 
     struct stat stat1;
     fstat(pipe_des[1], &stat1);
+
     if (S_ISCHR(stat1.st_mode)) {
         fprintf(stderr, "%d", stat1.st_mode);
     }
