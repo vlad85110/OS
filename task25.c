@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <sys/stat.h>
 #include <string.h>
 
 void _read(int* pipe_des) {
@@ -30,6 +31,12 @@ void _write(int* pipe_des) {
 
 int main(int argc, char **argv) {
     int pipe_des[2];
+
+    struct stat stat1;
+    fstat(pipe_des[1], &stat1);
+    if (S_ISCHR(stat1.st_mode)) {
+        fprintf(stderr, "%d", stat1.st_mode);
+    }
 
     if (pipe(pipe_des) == -1) {
         perror("pipe call error");
